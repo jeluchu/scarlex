@@ -2,7 +2,7 @@ package com.jeluchu.scarlex.models.anime.lastepisodes
 
 import com.google.gson.annotations.SerializedName
 
-data class Data(
+data class LastAnimeEpisode(
     @SerializedName("anime_id")
     val malId: Int,
 

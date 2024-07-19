@@ -8,6 +8,7 @@ import com.jeluchu.scarlex.core.utils.deserialize
 import com.jeluchu.scarlex.core.utils.empty
 import com.jeluchu.scarlex.models.anime.directory.AllAnimes
 import com.jeluchu.scarlex.models.anime.lastepisodes.LastEpisodes
+import com.jeluchu.scarlex.models.anime.servers.EpisodeServersItem
 import com.jeluchu.scarlex.models.base.Entity
 import com.jeluchu.scarlex.models.extractor.Extractor
 import com.jeluchu.scarlex.models.extractor.Servers
@@ -33,10 +34,13 @@ object Scarlex {
     suspend fun getServer(
         url: String,
         serverId: Servers,
-    ): Extractor = gson.deserialize(
-        restClient.request("extractor/get-video?token=$token&url=$url&server_id=${serverId.id}"),
-        Extractor::class.java
-    )
+    ): Extractor {
+        if (token.isEmpty()) throw ScarlexException("You need an API Key to get the answer")
+        return gson.deserialize(
+            restClient.request("extractor/get-video?token=$token&url=$url&server_id=${serverId.id}"),
+            Extractor::class.java
+        )
+    }
 
     /**
      * Function to get all animes.
@@ -91,6 +95,21 @@ object Scarlex {
         return gson.deserialize(
             restClient.request(fullEndpoint),
             LastEpisodes::class.java
+        )
+    }
+
+    /**
+     * Function to get all last episodes from sources
+     * @return Object with data of last episodes
+     * @see LastEpisodes
+     */
+    suspend fun getEpisodeServers(
+        id: Int,
+        malId: Int
+    ): List<EpisodeServersItem> {
+        if (token.isEmpty()) throw ScarlexException("You need an API Key to get the answer")
+        return gson.deserialize(
+            restClient.request("anime/episodes/servers?token=$token&id=$id&mal_id=$malId")
         )
     }
 }

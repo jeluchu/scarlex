@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class LastEpisodes(
     @SerializedName("data")
-    val items: List<Data>,
+    val items: List<LastAnimeEpisode>,
 
     @SerializedName("has_next_page")
     val hasNextPage: Boolean,

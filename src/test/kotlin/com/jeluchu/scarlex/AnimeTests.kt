@@ -27,6 +27,18 @@ class AnimeTests {
         runBlocking { delay(3000) }
     }
 
+    @Test
+    fun `on getEpisodeServers and return episode server list`() {
+        runBlocking {
+            Scarlex.setApiKey("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjk1MjA4NjQ5MywidXNlck5hbWUiOiJKZWx1IiwiaWF0IjoxNzIxMzc0MjcxfQ.4qd3pDqdzAfH8NjBoV_aCFTyGGwXGxCFa8gzEd8LK6c")
+
+            val result = runBlocking {  Scarlex.getEpisodeServers(id = 2116, malId = 1) }
+            assertTrue(result.isNotEmpty())
+        }
+
+        runBlocking { delay(3000) }
+    }
+
     companion object {
         @BeforeAll
         @JvmStatic

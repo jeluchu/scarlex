@@ -12,7 +12,7 @@ repositories {
 }  
   
 dependencies {  
-	implementation("com.github.jeluchu:scarlex:1.0.0-dev01")
+	implementation("com.github.jeluchu:scarlex:1.0.0-dev03")
 }  
 ```  
 # Example
