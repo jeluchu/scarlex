@@ -1,4 +1,4 @@
-package com.jeluchu.scarlex.models.anime
+package com.jeluchu.scarlex.models.anime.directory
 
 import com.google.gson.annotations.SerializedName
 

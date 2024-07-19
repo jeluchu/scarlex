@@ -1,27 +1,25 @@
 package com.jeluchu.scarlex
 
+import com.jeluchu.scarlex.models.extractor.Servers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 
-class AnimeTests {
+class ExtractorTests {
     @Test
     fun `on getAllAnimes and return anime list`() {
-        runBlocking {
-            val result = runBlocking {  Scarlex.getAllAnimes() }
-            assertTrue(result.items.isNotEmpty())
-        }
+        val link = "https://filemoon.sx/e/18dty25ai7g8"
 
-        runBlocking { delay(3000) }
-    }
-
-    @Test
-    fun `on getLastEpisodes and return anime list`() {
         runBlocking {
-            val result = runBlocking {  Scarlex.getLastEpisodes() }
-            assertTrue(result.items.isNotEmpty())
+            val result = runBlocking {
+                Scarlex.getServer(
+                    url = link,
+                    serverId = Servers.FILEMOON
+                )
+            }
+            assertTrue(result.uri.isNotEmpty())
         }
 
         runBlocking { delay(3000) }
