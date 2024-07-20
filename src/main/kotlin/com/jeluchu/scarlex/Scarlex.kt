@@ -1,6 +1,7 @@
 package com.jeluchu.scarlex
 
 import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import com.jeluchu.scarlex.core.connection.RestClient
 import com.jeluchu.scarlex.core.exception.ScarlexException
 import com.jeluchu.scarlex.core.utils.InterfaceAdapter
@@ -109,7 +110,8 @@ object Scarlex {
     ): List<EpisodeServersItem> {
         if (token.isEmpty()) throw ScarlexException("You need an API Key to get the answer")
         return gson.deserialize(
-            restClient.request("anime/episodes/servers?token=$token&id=$id&mal_id=$malId")
+            restClient.request("anime/episodes/servers?token=$token&id=$id&mal_id=$malId"),
+            object : TypeToken<List<EpisodeServersItem?>?>() {}.type
         )
     }
 }
